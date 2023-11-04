@@ -1,0 +1,20 @@
+image: node:14
+
+cache:
+  paths:
+    - node_modules/
+    - yarn.lock
+
+build-job:   
+  variables:
+    CI : "false"
+  only:
+    - staging/coco/notused    # This job runs in the build stage, which runs first.
+  script:
+    - export NODE_OPTIONS=--max_old_space_size=4096
+    - yarn
+    - sed  -i'.bak' 's/build\/pdf.js/legacy\/build\/pdf.js/g' node_modules/pdfjs-dist/package.json
+    - yarn build
+    - chmod og= $STAGE_ID
+    - scp -o stricthostkeychecking=no -r -i $STAGE_ID ./* $STAGE_USER@$STAGE_HOST:$STAGE_DEPLOY_PATH
+    - ssh -o StrictHostKeyChecking=no -i $STAGE_ID $STAGE_USER@$STAGE_HOST "$STAGE_DEPLOY_PATH/pm2.reload.sh"
