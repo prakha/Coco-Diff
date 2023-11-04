@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <title>Firstman eBook Sample</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/popup.css">
+
+        <script src="js/libs/jquery.min.js"></script>
+
+        <script src="js/libs/zip.min.js"></script>
+
+   
+
+        <script>
+            "use strict";
+
+
+
+            document.onreadystatechange = function () {
+              if (document.readyState == "complete") {
+                window.reader = ePubReader("", {
+                   restore: true
+                 });
+              }
+            };
+
+
+           
+
+            const popupClose =()=>{
+              document.getElementById("setting-popoup").style.display = "none";
+              document.getElementById("setting-open").style.display = "block";
+              document.getElementById("setting-close").style.display = "none";
+            }
+
+            const popupOpen =()=>{
+              document.getElementById("setting-popoup").style.display = "block";
+              document.getElementById("setting-open").style.display = "none";
+              document.getElementById("setting-close").style.display = "block";
+            }
+
+           
+
+            const openSearchBar=()=>{
+              document.getElementById("search-bar-sidebar").style.display = "block";
+             
+            }
+
+            const closeSearchBar=()=>{
+              document.getElementById("search-bar-sidebar").style.display = "none";
+             
+            }
+
+            const hideTextSelector=()=>{
+              document.getElementById("textSelectorPopup").style.display = "none";
+             
+            }
+
+            const showContentList=()=>{
+              document.getElementById("content-list-input").style.backgroundColor = "blue";
+              document.getElementById("content-list-input").style.color = "white";
+              document.getElementById("highlight-list-input").style.backgroundColor = "#8080804a";
+              document.getElementById("highlight-list-input").style.color = "black";
+              document.getElementById("bookmark-list-input").style.backgroundColor = "#8080804a";
+              document.getElementById("bookmark-list-input").style.color = "black";
+              
+              document.getElementById("content-list").style.display = "block";
+              document.getElementById("highlight-list").style.display = "none";
+              document.getElementById("bookmark-list-show").style.display = "none";
+            }
+
+
+            const showHighlightList=()=>{
+              document.getElementById("bookmark-list-input").style.backgroundColor = "#8080804a";
+              document.getElementById("bookmark-list-input").style.color = "black";
+              
+              document.getElementById("content-list-input").style.backgroundColor = "#8080804a";
+              document.getElementById("content-list-input").style.color = "black";
+              document.getElementById("highlight-list-input").style.backgroundColor = "blue";
+              document.getElementById("highlight-list-input").style.color = "white";
+              document.getElementById("content-list").style.display = "none";
+              document.getElementById("highlight-list").style.display = "block";
+              document.getElementById("bookmark-list-show").style.display = "none";
+            }
+
+
+            const showBookmarkList=()=>{
+              document.getElementById("content-list-input").style.backgroundColor = "#8080804a";
+              document.getElementById("content-list-input").style.color = "black";
+              document.getElementById("highlight-list-input").style.backgroundColor = "#8080804a";
+              document.getElementById("highlight-list-input").style.color = "black";
+              document.getElementById("bookmark-list-input").style.backgroundColor = "blue";
+              document.getElementById("bookmark-list-input").style.color = "white";
+              document.getElementById("content-list").style.display = "none";
+              document.getElementById("highlight-list").style.display = "none";
+              document.getElementById("bookmark-list-show").style.display = "block";
+            }
+        </script>
+
+        <script src="js/fmep.js"></script>
+
+        <script src="js/fmreader.js">
+        
+        </script>
+
+<style type="text/css">
+  ::selection {
+    background: yellow;
+  }
+
+#viewer div{
+  width: 200px;
+}
+
+  #extras {
+    width: 600px;
+    margin: 40px auto;
+  }
+
+  #highlights {
+    list-style: none;
+    margin-left: 0;
+    padding: 0;
+    width: 300px;
+  }
+
+  #highlights li {
+    list-style: none;
+    margin-bottom: 20px;
+    border-top: 1px solid #E2E2E2;
+    padding: 10px;
+    
+  }
+
+  #highlights a {
+    display: block;
+    
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+
+  }
+
+#highlights p{
+  font-size: 12px;
+  text-align: right;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+  #viewer.spreads {
+    top: 0;
+    margin-top: 50px;
+  }
+
+  [ref="epubjs-mk"] {
+    background: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPScxLjEnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZycgeG1sbnM6eGxpbms9J2h0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsnIHg9JzBweCcgeT0nMHB4JyB2aWV3Qm94PScwIDAgNzUgNzUnPjxnIGZpbGw9JyNCREJEQkQnIGlkPSdidWJibGUnPjxwYXRoIGNsYXNzPSdzdDAnIGQ9J00zNy41LDkuNEMxOS42LDkuNCw1LDIwLjUsNSwzNC4zYzAsNS45LDIuNywxMS4zLDcuMSwxNS42TDkuNiw2NS42bDE5LTcuM2MyLjgsMC42LDUuOCwwLjksOC45LDAuOSBDNTUuNSw1OS4yLDcwLDQ4LjEsNzAsMzQuM0M3MCwyMC41LDU1LjQsOS40LDM3LjUsOS40eicvPjwvZz48L3N2Zz4=") no-repeat;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 0;
+  }
+
+</style>
+
+        
+
+    </head>
+    <body onclick="hideTextSelector()" ondblclick="showTextSelector()">
+      <div id="search-bar-sidebar" class="search-bar-sidebar">
+        <h3>Search Text</h3>
+        <div  class="search-bar-container">
+          <div onclick="closeSearchBar()" class="arroww"><img style="height: 20px;"  src="img/left-arroww.png"></div>
+          <div class="search-box">
+            <input type="text"/>
+            <p style="margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: 5px;">X</p>
+          </div>
+        </div>
+
+        <div class="search-result-container">
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          <div class="search-results">
+            <ol style="margin: 0;padding: 0 10px;"><li style="font-weight: bold;font-size: 12px; color: black;">हिंदी कहानियाँ  एक ऐसी विधा</li></ol>
+            <p style="font-size: 12px;">हिन्दी कहानी एक रचना है, जो जीवन के किसी एक अंग या मनोभाव को</p>
+          </div>
+          
+        </div>
+      </div>
+      <div id="sidebar" >
+        <div style="display: none;" id="panels">
+          <a id="show-Bookmarks" class="show_view icon-bookmark" style="visibility:visible" data-view="Bookmarks"></a>
+          <a id="show-Notes" class="show_view icon-edit" data-view="Notes">Notes</a>
+
+        </div>
+        
+        <div id="searchView" class="view">
+          <ul id="searchResults"></ul>
+        </div>
+        
+        <div id="bookmarksView" class="view">
+          <ul id="bookmarkslist"></ul>
+        </div>
+        
+        <div id="notesView" class="view">
+          
+          <ol id="notes"></ol>
+        </div>
+        <div class="sidebar-options-container">
+          <div onclick="showContentList()" style="color: white;background-color: blue;" id="content-list-input" class="sidebar-options">contents</div>
+          <div onclick="showHighlightList()" id="highlight-list-input" class="sidebar-options">Highlights</div>
+          <div onclick="showBookmarkList()" id="bookmark-list-input" class="sidebar-options">Bookmarks</div>
+        </div>
+<div style="display: none;" id="bookmark-list-show">
+  
+</div>
+       
+
+        <div id="content-list" style="margin: 10px 0;">
+          
+            <ol class="contentLists" style="overflow: scroll; height: 100vh;display: block;" id="notes"></ol>
+            
+          
+          
+        </div>
+
+        <div id="highlight-list" style="margin: 10px 0;border-bottom: 1px solid #80808061;display: none;">
+          <div style="display: flex;justify-content: space-between;align-items: center;">
+            <ol id="highlights">
+              
+            </ol>
+            
+          </div>
+          <div  style="display: none;background: #95cd95;
+          margin-left: 1.3em;
+          margin-right: 10px;">
+            <p style=" font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;">हिंदी कहानियाँ  एक ऐसी विधा</p>
+          </div>
+          <div style="display: none;text-align: right;"><p style=" font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;">2022-12-23 16:16:26</p></div>
+        </div>
+      </div>
+      <div id="main" >
+
+        <div id="titlebar">
+          <div id="opener">
+            <a id="slider" class="icon-menu"></a>
+          </div>
+          <div id="metainfo">
+            <span id="book-title"></span>
+            
+          </div>
+          <div id="title-controls">
+            <img onclick="openSearchBar()"  class="setting" src="img/magnifying-glass.png">
+            <div style="position: relative; display: flex;">
+              <img onclick="popupOpen()" id="setting-open" class="setting" src="img/setting.png">
+              <img style="display: none;" onclick="popupClose()" id="setting-close" class="setting" src="img/setting.png">
+            </div>
+       
+            <a  id="bookmark"  class="icon-bookmark-empty">&nbsp;</a>
+           
+          </div>
+          <div style="display: none;" id="setting-popoup" class="setting-popup">
+            <div class="fonts">
+              <div id="bookFont" class="fonts-container-parent">
+                <div class="fonts-container">
+                  <h3>A</h3>
+                </div>
+                
+                <p>Book Fonts</p>
+              </div>
+
+              <div id="sanSerif"  class="fonts-container-parent">
+                <div class="fonts-container">
+                  <h3>A</h3>
+                </div>
+                <p>san serif</p>
+              </div>
+
+              <div id="serif"  class="fonts-container-parent">
+                <div class="fonts-container">
+                  <h3>A</h3>
+                </div>
+                <p>serif</p>
+              </div>
+
+              <div id="monospace" class="fonts-container-parent">
+                <div class="fonts-container">
+                  <h3>A</h3>
+                </div>
+                <p>Mono Space</p>
+              </div>
+            </div>
+
+
+            <div class="texts">
+<div id="fontIncrease" style="background-color: #dda2ac;" class="texts-container">
+  T
+</div >
+
+<div id="fontDecrease" style="font-size: 12px ;background-color: #dda2ac;" class="texts-container">
+  T
+</div>
+
+<div id="lineHeightIncrease" class="texts-container">
+  <img style="height: 20px;"  src="img/line-spacing.png">
+</div>
+
+<div id="lineHeightDecrease" class="texts-container">
+  <img style="height: 20px;" src="img/line-spacing-adjustment.png">
+</div>
+            </div>
+
+            <div class="colors">
+              <div id="whiteColor" style="background-color: white;" class="colors-container">
+                White
+              </div >
+              
+              <div id="brownColor" style="background-color: rgba(243,236,208,255);" class="colors-container">
+                Brown
+              </div>      
+              <div id="darkColor" style="background-color: rgba(90,90,90,255); color: white;" class="colors-container">
+                Dark
+              </div>
+              
+              <div id="blackColor" style="background-color: black; color: white;" class="colors-container">
+                Black
+              </div>
+                          </div>
+          </div>
+        </div>
+
+        <div style="z-index: 999;" id="divider"></div>
+        <div id="prev" class="arrow">&lt;</div>
+        <div  id="viewer">
+         <div style="display: none;" id="textSelectorPopup" class="selection-feature">
+          <img class="setting" src="img/marker.png">
+          <img class="setting" src="img/comment.png">
+          <img class="setting" src="img/snapshot.png">
+          <img class="setting" src="img/search.png">
+         </div>
+
+         <div class="range">
+          <div class="sliderValue">
+           
+          </div>
+  <div class="field">
+         
+  <input type="range" min="10" max="200" value="0" steps="1">
+          
+  </div>
+  </div>
+        </div>
+        <div id="next" class="arrow">&gt;</div>
+
+        <div id="loader"><img src="img/loader.gif"></div>
+      </div>
+      
+      <div class="overlay"></div>
+      
+      
+      
+    </body>
+</html>
